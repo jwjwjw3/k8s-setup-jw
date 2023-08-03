@@ -3,9 +3,6 @@
 ################################################################################
 # from https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 
-# install basic network tools, seems not needed on IBM cloud VMs
-# sudo apt update && sudo apt install avahi-utils vim -y
-
 # Forwarding IPv4 and letting iptables see bridged traffic 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
@@ -26,7 +23,7 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 
-# disable firewall (just do this to make sure turned off)
+# disable firewall
 # sudo ufw disable
 
 # Install basic network tools:

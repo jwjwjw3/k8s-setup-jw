@@ -60,10 +60,18 @@ All scripts the user needs to run are in:
     - use `kubectl apply -f <k8s_tools>.yaml` to install k8s tools including Kepler and Kube-Prometheus
 
 ## Step-by-step guide
-
+- make sure the ssh key files  can be found under directory `/k8s_cluster_setup/cluster_setup_src/ssh_credentials/`, and their names are: `id_rsa` and `id_rsa.pub`. (in principle you can also copy these two files to `$HOME/.ssh/` manually if you want, but make sure these ssh key files are already in `$HOME/.ssh` before running 2_copy_files_to_workers.sh)
 - change directory to /k8s_cluster_setup/cluster_setup_src/master
-- update 0_settings.sh by specifying which worker hostname file should be used.
-- run bash scripts from 1_master_basics.sh to 7_k8s_tools_install.sh. The current script cannot start until the previous script finish.
+- run bash script 1_master_basics.sh 
+- update 0_settings.sh by specifying which worker hostname file should be used. Here is an example content of the specified worker host name file (for example, for a 5-worker cluster, you may name this file as: 05_worker_cluster):
+    ```
+    10.240.64.3
+    10.240.64.4
+    10.240.64.5
+    10.240.64.6
+    10.240.64.7
+    ```
+- run bash script 2_copy_files_to_workers.sh to 7_k8s_tools_install.sh. The next script cannot start until this script finish.
 - Done! please run
     ```
     watch kubectl get pods -A -o wide

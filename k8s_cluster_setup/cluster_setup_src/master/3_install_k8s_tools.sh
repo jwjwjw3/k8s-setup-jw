@@ -23,7 +23,7 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 
-# disable firewall (just do this to make sure turned off)
+# disable firewall
 # sudo ufw disable
 
 # Install basic network tools:
@@ -74,10 +74,3 @@ containerd config default | tee /etc/containerd/config.toml
 sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml  
 service containerd restart
 service kubelet restart 
-
-
-# # (Kubuntu 23.04 specific?)
-# Add systemd.unified_cgroup_hierarchy=0 to GRUB_CMDLINE_LINUX_DEFAULT in the grub file (/etc/default/grub for Debian/Ubuntu). After this, run update-grub.
-# This solves the issue that kubectl on port 6443 randomly becomes connection refused, and kubelet service randomly fails.
-# Reference https://discuss.kubernetes.io/t/why-does-etcd-fail-with-debian-bullseye-kernel/19696/5
-# [On every node, end]
