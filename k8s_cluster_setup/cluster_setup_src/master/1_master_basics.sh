@@ -11,24 +11,30 @@ source ./0_settings.sh
 
 # create necessary directories for scripts and data
 mkdir $k8s_cluster_setup_pdir/k8s_cluster_setup/worker_hostnames
-# mkdir ~/Downloads
-mkdir ~/Documents
-# mkdir ~/Documents/k8s
-mkdir ~/Documents/parallelssh
-mkdir ~/Documents/parallelssh/tmpoutputs
-mkdir ~/Documents/parallelssh/tmperrors
+# mkdir $HOME/Downloads
+mkdir $HOME/Documents
+# mkdir $HOME/Documents/k8s
+mkdir $HOME/Documents/parallelssh
+mkdir $HOME/Documents/parallelssh/tmpoutputs
+mkdir $HOME/Documents/parallelssh/tmperrors
 
 # install parallel-ssh and wget
 sudo apt update && sudo apt install pssh wget -y
 
 # copy ssh keys and update ssh settings to make sure parallel-ssh can run scripts smoothly
-cp $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/ssh_credentials/id_rsa ~/.ssh/id_rsa
-cp $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/ssh_credentials/id_rsa.pub ~/.ssh/id_rsa.pub
+cp $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/ssh_credentials/id_rsa $HOME/.ssh/id_rsa
+cp $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/ssh_credentials/id_rsa.pub $HOME/.ssh/id_rsa.pub
 # update ssh config file
+if [ -f $HOME/.ssh/config ]; then
+    echo "$HOME/.ssh/config exists."
+else 
+    echo "$HOME/.ssh/config does not exist, creating file..."
+    touch $HOME/.ssh/config
+fi
 sshConfigPatternLines=$(grep -c 'StrictHostKeyChecking no' $HOME/.ssh/config)
 if [ $sshConfigPatternLines -eq 0 ]; then 
-    echo "Host *" >> ~/.ssh/config
-    echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+    echo "Host *" >> $HOME/.ssh/config
+    echo "   StrictHostKeyChecking no" >> $HOME/.ssh/config
 else 
     echo "ssh config line 'StrictHostKeyChecking no' found in $HOME/.ssh/config, assuming this is set for all hosts already."
 fi
