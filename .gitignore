@@ -1,0 +1,10 @@
+# ignore k8s tools folder
+/k8s_cluster_setup/k8s_tools/*
+/k8s_cluster_setup/k8s_tools/*
+
+# ignore ssh credentials
+/k8s_cluster_setup/cluster_setup_src/ssh_credentials/
+/k8s_cluster_setup/cluster_setup_src/ssh_credentials_*/
+
+# ignore k8s worker node names files
+/k8s_cluster_setup/worker_hostnames/
