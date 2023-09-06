@@ -66,7 +66,7 @@ then
 else
     git clone https://github.com/sustainable-computing-io/kepler.git $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
     cd $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
-    git checkout release-0.5.3
+    git checkout release-0.5.5
     rm -r _output
     sudo apt install make golang -y
     make build-manifest OPTS="PROMETHEUS_DEPLOY"
