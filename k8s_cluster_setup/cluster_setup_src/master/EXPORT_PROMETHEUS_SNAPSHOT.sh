@@ -7,7 +7,13 @@ pmt_pod_name="prometheus-k8s-1"
 snapshot_target_dir="/root/prometheus_snapshots-2nd/"
 
 echo "getting information from pod: $pmt_pod_name"
-pmt_pod_ip=`kubectl get pods -n monitoring -o wide | grep $pmt_pod_name | awk '{ print $6 }'`
+pmt_pod_line=`kubectl get pods -n monitoring -o wide | grep $pmt_pod_name`
+pmt_pod_PatternLines=`echo $pmt_pod_line | grep -c 'ago)'`
+if [ $pmt_pod_PatternLines -eq 0 ]; then 
+    pmt_pod_ip=`echo $pmt_pod_line | awk '{ print $6 }'`
+else 
+    pmt_pod_ip=`echo $pmt_pod_line | awk '{ print $8 }'`
+fi
 echo "pod internal IP is: $pmt_pod_ip"
 
 echo "deleting previous existing snapshots on pod: $pmt_pod_name"
