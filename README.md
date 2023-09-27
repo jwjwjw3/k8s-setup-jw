@@ -23,11 +23,11 @@ This repo contains several bash scripts used to install a k8s cluster with a 1-m
     curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml -O
     ``` -->
 - Kepler
-    - Kepler, Git branch release-0.5.3
+    - Kepler, Git branch release-0.5.5
     - build with command: 
         ```
         cd /k8s_cluster_setup/k8s_tools/kepler
-        make build-manifest OPTS="PROMETHEUS_DEPLOY"
+        make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"
         ```
 - Kube-Prometheus
     - Kube-Prometheus, Git branch release-0.12

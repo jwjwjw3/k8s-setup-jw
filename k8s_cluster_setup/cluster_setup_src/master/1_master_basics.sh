@@ -69,6 +69,6 @@ else
     git checkout release-0.5.5
     rm -r _output
     sudo apt install make golang -y
-    make build-manifest OPTS="PROMETHEUS_DEPLOY"
+    make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"
     cd $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/master    
 fi
