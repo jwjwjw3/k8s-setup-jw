@@ -29,6 +29,9 @@ This repo contains several bash scripts used to install a k8s cluster with a 1-m
         cd /k8s_cluster_setup/k8s_tools/kepler
         make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"
         ```
+    - Note: we need to change the two container image links in the generated ```deployment.yaml``` file, from the generated default Red Hat Quay.io links to our own pre-generated DockerHub image links: Kepler link is ```jvpoidaq/kepler-v0.5.5-37:latest```, Kepler model server link is ```jvpoidaq/kepler_model_server:latest```.
+        
+    - To avoid inconsistency and confusion, a Kepler ```deployment_custom.yaml``` file generated from the above Kepler procedure is already provided.
 - Kube-Prometheus
     - Kube-Prometheus, Git branch release-0.12
 

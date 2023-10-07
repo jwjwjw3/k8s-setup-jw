@@ -59,16 +59,30 @@ else
     git checkout release-0.12
     cd $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/master
 fi
+# # Kepler Notes:
+# # From Kepler release-0.5.5 we fix a specific version. Default generated Kepler installation yaml file from 
+# # source compile 'make build-manifest OPTS="whatever options"' is using the "latest" Kepler build from Red Hat 
+# # Quay.io, this container image changes weekly or monthly as Kepler developers are working on it, which could 
+# # cause inconsistent results in our testbed over time.
+# # Therefore, we fix Kepler version at v0.5.5-37-g1360266-linux-amd64-bcc (or git repo commit 1360266 by cmd
+# # "git checkout 136026613b450788f46a3d6bc73f321391a7e9d6"), and kepler model server version at git commit 45e1594
+# # (using cmd "git checkout 45e15941d654f6e0efa0b0e2dc7c2b6491cef12b"). Pre-generated docker images of kepler (cmd: "make")
+# # and kepler model server (cmd: "make build") are already uploaded at DockerHub jvpoidaq/kepler-v0.5.5-37 and 
+# # DockerHub jvpoidaq/kepler_model_server.
+# # The pre-generated deployment_custom.yaml file is generated from kepler source code using cmd: 
+# # 'make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"', and after generation we need to change the two images
+# # From Red Hat Quay.io latest images to our own DockerHub images in the generated yaml file.
+# # 
 # check Kepler
-if [ -d $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler ] 
-then
-    echo "kepler directory found, assuming kepler is already git cloned and switched to appropriate branch."
-else
-    git clone https://github.com/sustainable-computing-io/kepler.git $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
-    cd $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
-    git checkout release-0.5.5
-    rm -r _output
-    sudo apt install make golang -y
-    make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"
-    cd $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/master    
-fi
+# if [ -d $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler ] 
+# then
+#     echo "kepler directory found, assuming kepler is already git cloned and switched to appropriate branch."
+# else
+#     git clone https://github.com/sustainable-computing-io/kepler.git $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
+#     cd $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler
+#     git checkout release-0.5.5
+#     rm -r _output
+#     sudo apt install make golang -y
+#     make build-manifest OPTS="PROMETHEUS_DEPLOY ESTIMATOR_SIDECAR_DEPLOY"
+#     cd $k8s_cluster_setup_pdir/k8s_cluster_setup/cluster_setup_src/master    
+# fi

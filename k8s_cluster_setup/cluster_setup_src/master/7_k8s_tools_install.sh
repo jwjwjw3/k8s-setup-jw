@@ -12,7 +12,8 @@ kubectl wait \
 kubectl apply -f $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kube-prometheus/manifests/
 
 # install kepler
-kubectl apply -f $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler/_output/generated-manifest/deployment.yaml
+# kubectl apply -f $k8s_cluster_setup_pdir/k8s_cluster_setup/k8s_tools/kepler/_output/generated-manifest/deployment.yaml
+kubectl apply -f kepler_deploy/deployment_custom.yaml
 
 echo "waiting for 10s for prometheus to start..."
 sleep 10
